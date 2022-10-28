@@ -17,9 +17,9 @@ typedef struct
 {
     int code;
     char type[30];
-    Date sold_date; // تاریخ فروش
-    int warranty;   //  مدت زمان گارانتی به ماه
-    int service;    // تعداد تعمیرات
+    Date sold_date;
+    int warranty;
+    int service;    
 } Mobile;
 
 typedef struct
@@ -208,7 +208,6 @@ void add_moobile()
     char ch[80] = {'\000'};
     phone.warranty = 0, phone.service = 0;
     fstream write("memory.txt", ios::app);
-    write << endl;
 
     while (true)
     {
@@ -225,7 +224,6 @@ void add_moobile()
             continue;
         }
         phone.code = char_to_int(ch);
-        write << phone.code;
         break;
     }
 
@@ -241,7 +239,6 @@ void add_moobile()
         }
         for (int f = 0; f < 29; f++)
             phone.type[f] = ch[f];
-        write << " " << phone.type;
         break;
     }
     while (true)
@@ -314,9 +311,6 @@ void add_moobile()
         break;
     }
 
-    write << " :" << phone.sold_date.year << '/';
-    write << phone.sold_date.month << '/' << phone.sold_date.day << ';';
-
     while (true)
     {
         ch[80] = {'\000'};
@@ -338,7 +332,6 @@ void add_moobile()
             cout << "Enter valid number!\n";
             continue;
         }
-        write << ' ' << phone.warranty;
         break;
     }
     while (true)
@@ -362,9 +355,12 @@ void add_moobile()
             cout << "enter valid number!\n";
             continue;
         }
-        write << " -" << phone.service << '-';
         break;
     }
+    
+    write << endl << phone.code << " " << phone.type << " :" << phone.sold_date.year << '/' << phone.sold_date.month 
+    << '/' << phone.sold_date.day << ';' << ' ' << phone.warranty << " -" << phone.service << '-';
+
     cout << "information has been saved!";
     write.close();
 }
